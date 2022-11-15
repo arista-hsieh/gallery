@@ -6,20 +6,20 @@ const total = document.querySelector(".js-total")
 const order = document.querySelector(".orderInfo-btn")
 let productData = [];
 let cartData = [];
-function porductList(){
+function productList(){
     axios.get('https://livejs-api.hexschool.io/api/livejs/v1/customer/arista/products')
-  .then(function (response) {
+    .then(function (response) {
     // handle success
     productData = response.data.products;
     renderProductList();
-  })
-  .catch(function (error) {
+    })
+    .catch(function (error) {
     // handle error
     console.log(error);
-  })
-  .then(function () {
+    })
+    .then(function () {
     // always executed
-  });
+    });
 }
 function renderProductList(){
     let str = "";
@@ -35,7 +35,7 @@ function renderProductList(){
     })
     productWrap.innerHTML = str;
 }
-porductList();
+productList();
 getCartList();
 
 productSelect.addEventListener("change",function(e){
@@ -75,12 +75,12 @@ productWrap.addEventListener("click",function(e){
     })
     axios.post(`https://livejs-api.hexschool.io/api/livejs/v1/customer/arista/carts`,{
         "data": {
-          "productId": productId,
-          "quantity": numCheck
+        "productId": productId,
+        "quantity": numCheck
         }
-      }).then(function(response){
-          getCartList();
-      })
+    }).then(function(response){
+        getCartList();
+    })
 })
 
 function getCartList(){
@@ -153,23 +153,23 @@ order.addEventListener("click",function(e){
     }
     axios.post(`https://livejs-api.hexschool.io/api/livejs/v1/customer/arista/orders`,{
         "data": {
-          "user": {
-            "name": customerName,
-            "tel": customerPhone,
-            "email": customerEmail,
-            "address": customerAddress,
-            "payment": tradeWay
-          }
+        "user": {
+        "name": customerName,
+        "tel": customerPhone,
+        "email": customerEmail,
+        "address": customerAddress,
+        "payment": tradeWay
         }
-      }).then(function(response){
-          alert("訂單建立成功");
-          getCartList();
-          document.querySelector("#customerName").value = "";
-          document.querySelector("#customerPhone").value = "";
-          document.querySelector("#customerEmail").value = "";
-          document.querySelector("#customerAddress").value = "";
-          document.querySelector("#tradeWay").value = "ATM";
-      })
+        }
+    }).then(function(response){
+        alert("訂單建立成功");
+        getCartList();
+        document.querySelector("#customerName").value = "";
+        document.querySelector("#customerPhone").value = "";
+        document.querySelector("#customerEmail").value = "";
+        document.querySelector("#customerAddress").value = "";
+        document.querySelector("#tradeWay").value = "ATM";
+    })
 })
 
 function toThousands(x){

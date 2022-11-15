@@ -8,27 +8,27 @@ init();
 
 function renderC3(){
      // C3.js
-     let total = {};
-     orderData.forEach(function(item){
-         item.products.forEach(function(productItem){
-             if(total[productItem.category]==undefined){
+    let total = {};
+    orderData.forEach(function(item){
+        item.products.forEach(function(productItem){
+            if(total[productItem.category]==undefined){
                 total[productItem.category]=productItem.price*productItem.quantity;
-             }else{
+            }else{
                 total[productItem.category] += productItem.price * productItem.quantity;
-             }
-         })
-     })
-     console.log(total);
-     let categoryAry = Object.keys(total);
-     console.log(categoryAry);
-     let newData = [];
-     categoryAry.forEach(function(item){
-         let ary = [];
-         ary.push(item);
-         ary.push(total[item]);
-         newData.push(ary);
-     })
-     console.log(newData);
+            }
+        })
+    })
+    console.log(total);
+    let categoryAry = Object.keys(total);
+    console.log(categoryAry);
+    let newData = [];
+    categoryAry.forEach(function(item){
+        let ary = [];
+        ary.push(item);
+        ary.push(total[item]);
+        newData.push(ary);
+    })
+    console.log(newData);
 let chart = c3.generate({
     bindto: '#chart', // HTML 元素綁定
     data: {
@@ -69,20 +69,20 @@ function getOrderList(){
             str += `<tr>
             <td>${item.id}</td>
             <td>
-              <p>${item.user.name}</p>
-              <p>${item.user.tel}</p>
+                <p>${item.user.name}</p>
+                <p>${item.user.tel}</p>
             </td>
             <td>${item.user.address}</td>
             <td>${item.user.email}</td>
             <td>
-              ${productStr}
+                ${productStr}
             </td>
             <td>${orderTime}</td>
             <td>
-              <a class="orderStatus" data-status="${item.paid}" href="#" data-id="${item.id}">${orderStatus}</a>
+                <a class="orderStatus" data-status="${item.paid}" href="#" data-id="${item.id}">${orderStatus}</a>
             </td>
             <td>
-              <input type="button" data-id="${item.id}" class="delSingleOrder-Btn js-orderDelete" value="刪除">
+                <input type="button" data-id="${item.id}" class="delSingleOrder-Btn js-orderDelete" value="刪除">
             </td>
         </tr>`
         })
@@ -116,10 +116,10 @@ function changeOrderStatus(status,id){
     }
     axios.put(`https://livejs-api.hexschool.io/api/livejs/v1/admin/arista/orders/`,{
         "data": {
-          "id": id,
-          "paid": newStatus
+        "id": id,
+        "paid": newStatus
         }
-      },{
+    },{
         headers:{
             "Authorization":"2TT6NWY7qcSZieUybo01dizyyOm1",
         }
